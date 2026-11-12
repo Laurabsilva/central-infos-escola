@@ -188,11 +188,15 @@ app.get("/gravar-mensagem-correta", (req, res) => {
     await salvarMensagens([...lista, mensagem]);
     return { aviso: "Mensagem gravada com sucesso!", mensagem, total: lista.length + 1 };
   });
-  
+
   filaGravacoes = tarefa.catch(() => {});
   tarefa.then(resultado => res.json(resultado)).catch(erro => {
     console.error(erro);
     res.status(500).json({ erro: "Erro ao gravar arquivo." });
   });
+});
+
+app.listen(PORT, "0.0.0.0", () => {
+    console.log(`Servidor em http://localhost:${PORT}`);
 });
 
